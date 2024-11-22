@@ -1,8 +1,10 @@
 "use client";
 
-export default function AuthForm({ mode }) {
+import Link from "next/link";
+
+export default function AuthForm() {
   return (
-    <form id="auth-form" action={formAction}>
+    <form id="auth-form">
       <div>
         <img src="/images/auth-icon.jpg" alt="A lock icon" />
       </div>
