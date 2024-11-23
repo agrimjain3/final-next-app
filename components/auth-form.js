@@ -17,7 +17,7 @@ export default function AuthForm() {
         <input type="password" name="password" id="password" />
       </p>
 
-      <p>
+      <p >
         <button type="submit">Create Account</button>
       </p>
       <p>
