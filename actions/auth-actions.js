@@ -1,9 +1,9 @@
 "use server";
 
-import { redirect } from "next/dist/server/api-utils";
 import { createAuthSession, destroySession } from "../lib/auth";
 import { hashUserPassword, verifyPassword } from "../lib/hash";
 import createUser, { getUserByEmail } from "../lib/user";
+import { redirect } from 'next/navigation';
 
 export async function signup(prevState, formData) {
   const email = formData.get("email");
@@ -57,7 +57,7 @@ export async function login(prevData, formData) {
     };
   }
 
-  const isValidPassword = verifyPassword(existingUser.password);
+  const isValidPassword = verifyPassword(existingUser.password,password);
   if (!isValidPassword) {
     return {
       errors: {
