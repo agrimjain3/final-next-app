@@ -3,7 +3,7 @@
 import { createAuthSession, destroySession } from "../lib/auth";
 import { hashUserPassword, verifyPassword } from "../lib/hash";
 import createUser, { getUserByEmail } from "../lib/user";
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
 export async function signup(prevState, formData) {
   const email = formData.get("email");
@@ -29,7 +29,7 @@ export async function signup(prevState, formData) {
   try {
     const id = createUser(email, hashedPassword);
     await createAuthSession(id);
-    redirect("/mainpage");
+    return redirect("/mainpage");
   } catch (error) {
     if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
       return {
@@ -57,7 +57,7 @@ export async function login(prevData, formData) {
     };
   }
 
-  const isValidPassword = verifyPassword(existingUser.password,password);
+  const isValidPassword = verifyPassword(existingUser.password, password);
   if (!isValidPassword) {
     return {
       errors: {
@@ -67,7 +67,7 @@ export async function login(prevData, formData) {
   }
 
   await createAuthSession(existingUser.id);
-  redirect("/mainpage");
+  return redirect("/mainpage");
 }
 
 export async function auth(mode, prevState, formData) {
