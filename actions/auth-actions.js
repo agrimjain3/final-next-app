@@ -81,3 +81,7 @@ export async function logout() {
   await destroySession();
   redirect("/");
 }
+
+export async function back() {
+  redirect("/mainpage");
+}
