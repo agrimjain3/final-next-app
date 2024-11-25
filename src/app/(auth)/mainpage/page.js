@@ -1,14 +1,12 @@
 "use client";
-
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import classes from "./page.module.css";
+import Carousel from "../../../../components/carousel";
 
 export default function MainPage() {
   const [bodyParts, setBodyParts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [exercises, setExercises] = useState([]);
-  const [error, setError] = useState(null); // Error state
 
   useEffect(() => {
     const fetchBodyParts = async () => {
@@ -34,26 +32,6 @@ export default function MainPage() {
     fetchBodyParts();
   }, []);
 
-  const fetchBodyPartData = async (bodyPart) => {
-    const url = `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`;
-    const options = {
-      method: "GET",
-      headers: {
-        "x-rapidapi-key": "5b98d952bdmsha36c0cdc1e57ec6p1ded4djsn14e6dd61ce5c",
-        "x-rapidapi-host": "exercisedb.p.rapidapi.com",
-      },
-    };
-
-    try {
-      const response = await fetch(url, options);
-      const data = await response.json();
-      setExercises(data);
-      console.log(data);
-    } catch (error) {
-      setError("Failed to load exercises. Please try again.");
-    }
-  };
-
   const changePage = async (bodypart) => {
     redirect(`/${bodypart}`);
   };
@@ -66,40 +44,42 @@ export default function MainPage() {
     );
   }
 
-  if (error) {
-    return <div className="text-red-500">{error}</div>;
-  }
+  // if (error) {
+  //   return <div className="text-red-500">{error}</div>;
+  // }
+
+  const images = bodyParts.map((bodypart) => {
+    const path = `/images/${bodypart}.jpg`;
+    console.log("Image path:", path); // Debugging line
+    return path;
+  });
 
   return (
     <>
+      <Carousel images={images} interval={3000}/>
+
       <div>
         <ul className="flex flex-col gap-2 w-full justify-center items-center">
           {bodyParts.map((bodypart, index) => (
             <li key={index}>
-              <button
-                className="button bg-blue-500 text-white px-4 py-2 rounded"
-                onClick={() => changePage(bodypart)}
-              >
-                {bodypart}
-              </button>
+              <div className="flex flex-col items-center justify-center border-2 border-gray-500 p-5">
+                <div className={classes.imgCont}>
+                  <img
+                    src={`/images/${bodypart}.jpg`}
+                    alt="image"
+                    className=""
+                  />
+                </div>
+                <button
+                  className="button bg-blue-500 text-white px-4 py-2 rounded uppercase w-full"
+                  onClick={() => changePage(bodypart)}
+                >
+                  {bodypart}
+                </button>
+              </div>
             </li>
           ))}
         </ul>
-        {exercises.length > 0 && (
-          <div className="mt-4">
-            <h2 className="text-center text-lg font-semibold">Exercises</h2>
-            <ul className="flex flex-col gap-2 w-full justify-center items-center">
-              {exercises.map((exercise, index) => (
-                <li
-                  key={index}
-                  className="border-b border-gray-300 p-2 w-full text-center"
-                >
-                  {exercise.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </>
   );
