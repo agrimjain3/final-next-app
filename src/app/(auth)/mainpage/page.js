@@ -7,6 +7,7 @@ import Carousel from "../../../../components/carousel";
 export default function MainPage() {
   const [bodyParts, setBodyParts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     const fetchBodyParts = async () => {
@@ -32,6 +33,21 @@ export default function MainPage() {
     fetchBodyParts();
   }, []);
 
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch("/api/getCarouselImages");
+        const data = await response.json();
+        setImages(data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
   const changePage = async (bodypart) => {
     redirect(`/${bodypart}`);
   };
@@ -44,30 +60,21 @@ export default function MainPage() {
     );
   }
 
-  // if (error) {
-  //   return <div className="text-red-500">{error}</div>;
-  // }
-
-  const images = bodyParts.map((bodypart) => {
-    const path = `/images/${bodypart}.jpg`;
-    console.log("Image path:", path); // Debugging line
-    return path;
-  });
-
   return (
     <>
-      <Carousel images={images} interval={3000}/>
+      <Carousel images={images} interval={3000} />
 
-      <div>
-        <ul className="flex flex-col gap-2 w-full justify-center items-center">
+      <div className={classes.gridCont}>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-5">
           {bodyParts.map((bodypart, index) => (
             <li key={index}>
-              <div className="flex flex-col items-center justify-center border-2 border-gray-500 p-5">
+              <div className="flex flex-col items-center justify-center border-2 border-gray-500 p-5 rounded-lg">
                 <div className={classes.imgCont}>
                   <img
                     src={`/images/${bodypart}.jpg`}
                     alt="image"
                     className=""
+                  
                   />
                 </div>
                 <button

@@ -1,4 +1,15 @@
-.imgCont{
-    height: 20rem;
-    width: 20rem;
-}
+.imgCont {
+    height: 15rem;
+    width: 15rem;
+  }
+  
+  @media (min-width: 768px) {
+    .imgCont {
+      height: 20rem;
+      width: 20rem;
+    }
+  }
+
+  .gridCont{
+    padding: 5rem !important;
+  }
