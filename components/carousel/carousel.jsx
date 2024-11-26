@@ -28,18 +28,6 @@ export default function Carousel({ images, interval }) {
           alt="carousel image"
         />
       </div>
-      <div className={classes.carouselControls}>
-        <div className={classes.carouselButton}>
-          <button onClick={prevSlide} className={classes.prevButton}>
-            &#60;
-          </button>
-        </div>
-        <div className={classes.carouselButton}>
-          <button onClick={nextSlide} className={classes.nextButton}>
-            &#62;
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

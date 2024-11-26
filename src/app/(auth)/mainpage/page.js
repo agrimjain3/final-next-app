@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import classes from "./page.module.css";
-import Carousel from "../../../../components/carousel";
+import Carousel from "../../../../components/carousel/carousel";
 
 export default function MainPage() {
   const [bodyParts, setBodyParts] = useState([]);
@@ -49,45 +49,51 @@ export default function MainPage() {
   }, []);
 
   const changePage = async (bodypart) => {
-    redirect(`/${bodypart}`);
+    redirect(`/mainpage/${bodypart}`);
   };
 
   if (loading) {
     return (
-      <>
-        <div>LOADING...</div>
-      </>
+      <div className="flex items-center justify-center h-screen">
+        <div className="loader"></div>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50">
       <Carousel images={images} interval={3000} />
 
-      <div className={classes.gridCont}>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-5">
+      <div className="container mx-auto py-10">
+        <h1 className="text-center text-2xl font-bold text-gray-800 mb-8 uppercase">
+          Choose a Body Part
+        </h1>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {bodyParts.map((bodypart, index) => (
-            <li key={index}>
-              <div className="flex flex-col items-center justify-center border-2 border-gray-500 p-5 rounded-lg">
-                <div className={classes.imgCont}>
-                  <img
-                    src={`/images/${bodypart}.jpg`}
-                    alt="image"
-                    className=""
-                  
-                  />
-                </div>
+            <li
+              key={index}
+              className="bg-white rounded-lg shadow hover:shadow-2xl p-6"
+            >
+              <div className="flex flex-col items-center">
+                <img
+                  src={`/images/${bodypart}.jpg`}
+                  alt={bodypart}
+                  className="rounded-lg mb-4 w-full object-cover h-48"
+                />
+                <p className="text-lg font-bold text-gray-700 mb-2 uppercase">
+                  {bodypart}
+                </p>
                 <button
-                  className="button bg-blue-500 text-white px-4 py-2 rounded uppercase w-full"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-full transition"
                   onClick={() => changePage(bodypart)}
                 >
-                  {bodypart}
+                  Get Exercises
                 </button>
               </div>
             </li>
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 import { back, logout } from "../../../actions/auth-actions";
+import HeaderLoggedIn from "../../../components/logged-in-header/header";
 import "../globals.css";
 
 export const metadata = {
@@ -10,15 +11,7 @@ export default function AuthRootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <header id="auth-header">
-          <p>Welcome Back!</p>
-          <form action={logout}>
-            <button>Logout</button>
-          </form>
-          <form action={back}>
-            <button>Back</button>
-          </form>
-        </header>
+        <HeaderLoggedIn/>
         {children}
       </body>
     </html>
