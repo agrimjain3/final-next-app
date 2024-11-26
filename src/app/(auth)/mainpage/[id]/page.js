@@ -19,20 +19,15 @@ export default function BodyPartPage({ params: initialParams }) {
     if (!id) return; // Wait until `id` is resolved
 
     const fetchTarget = async () => {
-      const url = `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${id}`; // Use resolved id
-      const options = {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key": "5b98d952bdmsha36c0cdc1e57ec6p1ded4djsn14e6dd61ce5c",
-          "x-rapidapi-host": "exercisedb.p.rapidapi.com",
-        },
-      };
+      const url = `https://exercisedb-api.vercel.app/api/v1/bodyparts/${id}/exercises`;
 
+      const options = { method: "GET" };
       try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result);
-        setExercises(result); // Update state with the fetched data
+
+        console.log(result); // Debugging
+        setExercises(result.data.exercises); // Update state with the fetched data
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -49,8 +44,13 @@ export default function BodyPartPage({ params: initialParams }) {
       <ul className="flex flex-col gap-6">
         {exercises.length > 0 ? (
           exercises.map((exercise, index) => (
-            <li key={exercise.id || index} className="border p-4 rounded-md shadow-md">
-              <h2 className="text-lg font-semibold mb-2 capitalize">{exercise.name}</h2>
+            <li
+              key={exercise.exerciseId || index}
+              className="border p-4 rounded-md shadow-md"
+            >
+              <h2 className="text-lg font-semibold mb-2 capitalize">
+                {exercise.name}
+              </h2>
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex items-center justify-center">
                   <img
@@ -61,17 +61,24 @@ export default function BodyPartPage({ params: initialParams }) {
                 </div>
                 <div>
                   <p>
-                    <strong>Targeted Muscles:</strong> {exercise.target}
+                    <strong>Targeted Muscles:</strong>{" "}
+                    {exercise.targetMuscles.join(", ")}
                   </p>
                   <p>
                     <strong>Secondary Muscles:</strong>{" "}
-                    {exercise.secondaryMuscles ? exercise.secondaryMuscles.join(", ") : "None"}
+                    {exercise.secondaryMuscles.length > 0
+                      ? exercise.secondaryMuscles.join(", ")
+                      : "None"}
                   </p>
                   <h3 className="text-md font-semibold mt-4">Instructions:</h3>
                   <ol className="list-decimal list-inside mt-2">
-                    {exercise.instructions.map((instruction, idx) => (
-                      <li key={idx}>{instruction}</li>
-                    ))}
+                    {exercise.instructions?.length > 0 ? (
+                      exercise.instructions.map((instruction, idx) => (
+                        <li key={idx}>{instruction}</li>
+                      ))
+                    ) : (
+                      <li>No instructions provided.</li>
+                    )}
                   </ol>
                 </div>
               </div>

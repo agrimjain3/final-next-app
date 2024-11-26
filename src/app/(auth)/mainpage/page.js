@@ -11,20 +11,14 @@ export default function MainPage() {
 
   useEffect(() => {
     const fetchBodyParts = async () => {
-      const url = "https://exercisedb.p.rapidapi.com/exercises/bodyPartList";
-      const options = {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key":
-            "5b98d952bdmsha36c0cdc1e57ec6p1ded4djsn14e6dd61ce5c",
-          "x-rapidapi-host": "exercisedb.p.rapidapi.com",
-        },
-      };
+      const url = "https://exercisedb-api.vercel.app/api/v1/bodyparts";
+      const options = { method: "GET" };
 
       try {
         const response = await fetch(url, options);
-        const data = await response.json();
-        setBodyParts(data);
+        const result = await response.json();
+        const bodyPartNames = result.data.map(item => item.name);
+        setBodyParts(bodyPartNames);
         setLoading(false);
       } catch (error) {
         console.error(error);

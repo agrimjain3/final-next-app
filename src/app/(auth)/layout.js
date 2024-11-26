@@ -1,5 +1,5 @@
 import { back, logout } from "../../../actions/auth-actions";
-import HeaderLoggedIn from "../../../components/logged-in-header/header";
+import HeaderLoggedIn from "../../../components/logged-in-header/navBar";
 import "../globals.css";
 
 export const metadata = {
