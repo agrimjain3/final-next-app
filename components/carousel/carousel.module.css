@@ -6,7 +6,12 @@
   padding: 2rem;
   overflow: hidden;
   border-radius: 1rem;
-  box-shadow: 0rem 0.25rem 0.625rem rgba(0, 0, 0, 0.8);
+  /* box-shadow: 0rem 0.25rem 0.625rem rgba(0, 0, 0, 0.8); */
+}
+@media (min-width: 768px) {
+  .carouselContainer {
+    padding: 4rem;
+  }
 }
 
 .carouselSlide {

@@ -17,7 +17,7 @@ export default function MainPage() {
       try {
         const response = await fetch(url, options);
         const result = await response.json();
-        const bodyPartNames = result.data.map(item => item.name);
+        const bodyPartNames = result.data.map((item) => item.name);
         setBodyParts(bodyPartNames);
         setLoading(false);
       } catch (error) {
@@ -55,18 +55,21 @@ export default function MainPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-16 md:pt-12 sm:pt-8" id="home">
       <Carousel images={images} interval={3000} />
 
       <div className="container mx-auto py-10">
         <h1 className="text-center text-2xl font-bold text-gray-800 mb-8 uppercase">
           Choose a Body Part
         </h1>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ul
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-5"
+          id="exercises"
+        >
           {bodyParts.map((bodypart, index) => (
             <li
               key={index}
-              className="bg-white rounded-lg shadow hover:shadow-2xl p-6"
+              className="bg-white rounded-lg  shadow-2xl hover:shadow-black p-6"
             >
               <div className="flex flex-col items-center">
                 <img
