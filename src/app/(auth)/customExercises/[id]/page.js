@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import { exerciseModel } from "../../../../../mongotest/model";
+import backButtonClick from "./backButtonClick";
 
 export default async function DetailedPage({ params }) {
   const { id } = params;
-
 
   if (mongoose.connection.readyState === 0) {
     try {
@@ -22,7 +22,6 @@ export default async function DetailedPage({ params }) {
     }
   }
 
-
   let exerciseDetails = null;
   try {
     exerciseDetails = await exerciseModel.find({ id });
@@ -37,7 +36,6 @@ export default async function DetailedPage({ params }) {
       </div>
     );
   }
-
 
   return (
     <div className="w-full pt-20 ">
@@ -78,7 +76,12 @@ export default async function DetailedPage({ params }) {
                 </div>
               </div>
               <div className="flex w-full justify-center">
-                <button className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2 rounded">Back</button>
+                <button
+                  className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2 rounded"
+                  onClick={backButtonClick}
+                >
+                  Back
+                </button>
               </div>
             </li>
           ))
