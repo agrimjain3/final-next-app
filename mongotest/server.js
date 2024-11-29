@@ -2,6 +2,7 @@
 
 import mongoose from "mongoose";
 import { contactModel, exerciseModel } from "./model";
+import { v4 as uuidv4 } from "uuid";
 
 // MongoDB Connection
 async function mongoDB() {
@@ -32,10 +33,18 @@ export async function addContactData(firstName, lastName, email, message) {
 }
 
 // Add Exercise Data
-export async function addExerciseData(bodypart, name, image, targetedMuscles,instructions) {
+export async function addExerciseData(
+  bodypart,
+  name,
+  image,
+  targetedMuscles,
+  instructions
+) {
+  const id = uuidv4();
   try {
     await mongoDB();
     const data = await exerciseModel.create({
+      id,
       bodypart,
       name,
       image,
@@ -55,6 +64,18 @@ export async function getAllExercise() {
     await mongoDB();
     const exercises = await exerciseModel.find({});
     return exercises;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function delteExerciseById(id) {
+  try {
+    const deletedExercise = await exerciseModel.findOneAndDelete({ id: id });
+    if (!deletedExercise) {
+      return { success: false, message: "Exercise Not Found" };
+    }
+    return { success: true, message: "Exercise deleted sucessfully!" };
   } catch (error) {
     console.log(error);
   }

@@ -4,19 +4,19 @@ import { useEffect, useState } from "react";
 import classes from "./page.module.css";
 
 export default function BodyPartPage({ params: initialParams }) {
-  const [exercises, setExercises] = useState([]); // State to store the fetched exercises
-  const [id, setId] = useState(null); // State to store the resolved `id`
+  const [exercises, setExercises] = useState([]); 
+  const [id, setId] = useState(null); 
 
   useEffect(() => {
-    // Unwrap `params` if it's a Promise
+
     (async () => {
-      const resolvedParams = await initialParams; // Await the params promise
-      setId(resolvedParams.id); // Extract and set `id`
+      const resolvedParams = await initialParams; 
+      setId(resolvedParams.id); 
     })();
   }, [initialParams]);
 
   useEffect(() => {
-    if (!id) return; // Wait until `id` is resolved
+    if (!id) return; 
 
     const fetchTarget = async () => {
       const url = `https://exercisedb-api.vercel.app/api/v1/bodyparts/${id}/exercises`;
@@ -26,15 +26,15 @@ export default function BodyPartPage({ params: initialParams }) {
         const response = await fetch(url, options);
         const result = await response.json();
 
-        console.log(result); // Debugging
-        setExercises(result.data.exercises); // Update state with the fetched data
+        console.log(result); 
+        setExercises(result.data.exercises); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchTarget();
-  }, [id]); // Fetch exercises when `id` changes
+  }, [id]); 
 
   return (
     <div className="w-full p-4">
