@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { exerciseModel } from "../../../../../mongotest/model";
+import { exerciseModel } from "../../../../mongotest/model";
 import backButtonClick from "./backButtonClick";
 
 export default async function DetailedPage({ params }) {
