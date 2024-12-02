@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import classes from "./page.module.css";
+import Image from "next/image";
 
 export default function BodyPartPage({ params: initialParams }) {
   const [exercises, setExercises] = useState([]); 
@@ -53,7 +54,7 @@ export default function BodyPartPage({ params: initialParams }) {
               </h2>
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex items-center justify-center">
-                  <img
+                  <Image
                     src={exercise.gifUrl}
                     alt={exercise.name}
                     className={`${classes.image} w-48 h-48 object-cover`}
