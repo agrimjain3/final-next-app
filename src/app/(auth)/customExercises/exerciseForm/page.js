@@ -3,6 +3,7 @@ import { useState } from "react";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { addExerciseData } from "../../../../../mongotest/server";
+import Image from "next/image";
 
 export default function ExerciseForm() {
   const {
@@ -102,7 +103,7 @@ export default function ExerciseForm() {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900"
             />
             {imagePreview && (
-              <img
+              <Image
                 src={imagePreview}
                 alt="Preview"
                 className="mt-4 w-32 h-32 object-cover rounded-lg"

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -82,7 +83,7 @@ export default function CustomExercisePage() {
             className="bg-white rounded-lg shadow-2xl hover:shadow-black p-6"
           >
             <div className="flex flex-col items-center">
-              <img
+              <Image
                 src={
                   exercise.image ||
                   "https://cdn-exercisedb.vercel.app/api/v1/images/Hy9D21L.gif"
