@@ -67,7 +67,7 @@ export async function login(prevData, formData) {
   }
 
   await createAuthSession(existingUser.id);
-  return redirect("/mainpage");
+  return redirect("https://final-next-app.vercel.app/mainpage");
 }
 
 export async function auth(mode, prevState, formData) {
