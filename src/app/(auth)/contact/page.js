@@ -1,7 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { redirect } from "next/navigation";
-import { addContactData } from "../../../mongotest/server";
+import { addContactData } from "../../../../mongotest/server";
 
 export default function ContactForm() {
   const {

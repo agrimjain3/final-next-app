@@ -1,7 +1,8 @@
 "use client";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
-import Carousel from "../../../components/carousel/carousel";
+import classes from "./page.module.css";
+import Carousel from "../../../../components/carousel/carousel";
 import Image from "next/image";
 
 export default function MainPage() {
