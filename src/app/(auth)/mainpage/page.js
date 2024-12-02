@@ -3,7 +3,6 @@ import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import classes from "./page.module.css";
 import Carousel from "../../../../components/carousel/carousel";
-import Image from "next/image";
 
 export default function MainPage() {
   const router = useRouter();
@@ -74,7 +73,7 @@ export default function MainPage() {
               className="bg-white rounded-lg  shadow-2xl hover:shadow-black p-6"
             >
               <div className="flex flex-col items-center">
-                <Image
+                <img
                   src={`/images/${bodypart}.jpg`}
                   alt={bodypart}
                   className="rounded-lg mb-4 w-full object-cover h-48"

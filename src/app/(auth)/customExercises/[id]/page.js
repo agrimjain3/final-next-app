@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { exerciseModel } from "../../../../../mongotest/model";
 import backButtonClick from "./backButtonClick";
-import Image from "next/image";
 
 export default async function DetailedPage({ params }) {
   const { id } = params;
@@ -55,7 +54,7 @@ export default async function DetailedPage({ params }) {
               </h2>
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex items-center justify-center">
-                  <Image
+                  <img
                     src={
                       exercise.image ||
                       "https://cdn-exercisedb.vercel.app/api/v1/images/Hy9D21L.gif"
