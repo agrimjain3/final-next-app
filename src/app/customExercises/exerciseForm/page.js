@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { addExerciseData } from "../../../../../mongotest/server";
+import { addExerciseData } from "../../../../mongotest/server";
 import {Image} from 'next/image';
 
 
