@@ -1,10 +1,11 @@
 "use client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import classes from "./page.module.css";
 import Carousel from "../../../../components/carousel/carousel";
 
 export default function MainPage() {
+  const router = useRouter();
   const [bodyParts, setBodyParts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
@@ -43,7 +44,7 @@ export default function MainPage() {
   }, []);
 
   const changePage = async (bodypart) => {
-    redirect(`/mainpage/${bodypart}`);
+    router.push(`/mainpage/${bodypart}`);
   };
 
   if (loading) {
