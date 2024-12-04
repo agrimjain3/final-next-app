@@ -11,6 +11,7 @@ export default function NavBar() {
     setMenuOpen((prev) => !prev);
   };
 
+  
   return (
     <header className={styles.navbar}>
       <div className={styles.navContainer}>
