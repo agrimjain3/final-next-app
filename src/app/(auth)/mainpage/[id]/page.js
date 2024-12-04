@@ -4,19 +4,19 @@ import { useEffect, useState } from "react";
 import classes from "./page.module.css";
 
 export default function BodyPartPage({ params: initialParams }) {
-  const [exercises, setExercises] = useState([]); 
-  const [id, setId] = useState(null); 
+  const [exercises, setExercises] = useState([]);
+  const [id, setId] = useState(null);
 
   useEffect(() => {
-
     (async () => {
-      const resolvedParams = await initialParams; 
-      setId(resolvedParams.id); 
+      const resolvedParams = await initialParams;
+      const id = await resolvedParams.id;
+      setId(id);
     })();
   }, [initialParams]);
 
   useEffect(() => {
-    if (!id) return; 
+    if (!id) return;
 
     const fetchTarget = async () => {
       const url = `https://exercisedb-api.vercel.app/api/v1/bodyparts/${id}/exercises`;
@@ -26,15 +26,15 @@ export default function BodyPartPage({ params: initialParams }) {
         const response = await fetch(url, options);
         const result = await response.json();
 
-        console.log(result); 
-        setExercises(result.data.exercises); 
+        console.log(result);
+        setExercises(result.data.exercises);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchTarget();
-  }, [id]); 
+  }, [id]);
 
   return (
     <div className="w-full p-4">

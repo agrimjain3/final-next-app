@@ -1,7 +1,6 @@
 "use client";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import classes from "./page.module.css";
 import Carousel from "../../../../components/carousel/carousel";
 
 export default function MainPage() {
