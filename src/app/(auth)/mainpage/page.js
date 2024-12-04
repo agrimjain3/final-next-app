@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Carousel from "../../../../components/carousel/carousel";
+import Link from "next/link";
 
 export default function MainPage() {
   const router = useRouter();
@@ -42,10 +43,6 @@ export default function MainPage() {
     fetchImages();
   }, []);
 
-  const changePage = async (bodypart) => {
-    router.push(`/mainpage/${bodypart}`);
-  };
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -80,12 +77,12 @@ export default function MainPage() {
                 <p className="text-lg font-bold text-gray-700 mb-2 uppercase">
                   {bodypart}
                 </p>
-                <button
+                <Link
+                  href={`/mainpage/${bodypart}`}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-full transition"
-                  onClick={() => changePage(bodypart)}
                 >
                   Get Exercises
-                </button>
+                </Link>
               </div>
             </li>
           ))}
