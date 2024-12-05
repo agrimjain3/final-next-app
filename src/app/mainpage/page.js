@@ -1,56 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation";
+
 import { useEffect, useState } from "react";
 import Carousel from "../../../components/carousel/carousel";
 import Link from "next/link";
+import Loader from "../../../components/Loader";
 
-export default function MainPage() {
-  const router = useRouter();
-  const [bodyParts, setBodyParts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    const fetchBodyParts = async () => {
-      const url = "https://exercisedb-api.vercel.app/api/v1/bodyparts";
-      const options = { method: "GET" };
-
-      try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        const bodyPartNames = result.data.map((item) => item.name);
-        setBodyParts(bodyPartNames);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchBodyParts();
-  }, []);
-
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const response = await fetch("/api/getCarouselImages");
-        const data = await response.json();
-        setImages(data);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchImages();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="loader"></div>
-      </div>
-    );
-  }
-
+export function Content({ images, bodyParts }) {
   return (
     <div className="min-h-screen bg-gray-50 pt-16 md:pt-12 sm:pt-8" id="home">
       <Carousel images={images} interval={3000} />
@@ -89,5 +44,54 @@ export default function MainPage() {
         </ul>
       </div>
     </div>
+  );
+}
+
+export default function MainPage() {
+  const [bodyParts, setBodyParts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    // setIsLoading(true);
+
+    const fetchImages = async () => {
+      try {
+        const response = await fetch("/api/getCarouselImages");
+        const data = await response.json();
+        setImages(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchImages();
+
+    const fetchBodyParts = async () => {
+      const url = "https://exercisedb-api.vercel.app/api/v1/bodyparts";
+      const options = { method: "GET" };
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        const bodyPartNames = result.data.map((item) => item.name);
+        setBodyParts(bodyPartNames);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchBodyParts();
+
+    setIsLoading(false);
+  }, []);
+
+  return (
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Content images={images} bodyParts={bodyParts} />
+      )}
+    </>
   );
 }

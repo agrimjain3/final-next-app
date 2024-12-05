@@ -1,4 +1,4 @@
-export default function FancyLoader() {
+export default function Loader() {
   return (
     <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 z-10">
       <div className="relative w-12 h-12 animate-spin-transform">
