@@ -1,6 +1,7 @@
 "use client";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import Loader from "../../../components/Loader";
 
 export default function CustomExercisePage() {
   const [exercises, setExercises] = useState([]);
@@ -76,7 +77,9 @@ export default function CustomExercisePage() {
       </h2>
 
       {loading ? (
-        <p className="text-center text-gray-700 text-lg">Loading...</p>
+        <div className="text-center text-gray-700 text-lg">
+          <Loader />
+        </div>
       ) : exercises.length === 0 ? (
         <p className="text-center text-gray-700 text-lg">No exercises found.</p>
       ) : (

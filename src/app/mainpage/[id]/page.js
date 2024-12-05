@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import classes from "./page.module.css";
+import Loader from "../../../../components/Loader";
 
 export default function BodyPartPage({ params: initialParams }) {
   const [exercises, setExercises] = useState([]);
@@ -85,7 +86,9 @@ export default function BodyPartPage({ params: initialParams }) {
             </li>
           ))
         ) : (
-          <li className="text-center text-gray-500">Loading exercises...</li>
+          <li className="text-center text-gray-500">
+            <Loader />
+          </li>
         )}
       </ul>
     </div>

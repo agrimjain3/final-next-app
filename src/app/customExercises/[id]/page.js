@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { exerciseModel } from "../../../../mongotest/model";
 import backButtonClick from "./backButtonClick";
+import Loader from "../../../../components/Loader";
 
 export default async function DetailedPage({ params }) {
   const { id } = params;
@@ -86,7 +87,9 @@ export default async function DetailedPage({ params }) {
             </li>
           ))
         ) : (
-          <li className="text-center text-gray-500">Loading exercises...</li>
+          <li className="text-center text-gray-500">
+            <Loader />
+          </li>
         )}
       </ul>
     </div>

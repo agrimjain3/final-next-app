@@ -32,6 +32,15 @@ export const theme = {
       background: "var(--background)",
       foreground: "var(--foreground)",
     },
+    animation: {
+      "spin-transform": "spin-transform 1.5s infinite linear",
+    },
+    keyframes: {
+      "spin-transform": {
+        "0%": { transform: "rotate3d(1, 1, 0, 0deg)" },
+        "100%": { transform: "rotate3d(1, 1, 0, 360deg)" },
+      },
+    },
   },
 };
 export const plugins = [];
