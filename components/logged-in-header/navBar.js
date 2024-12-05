@@ -2,7 +2,7 @@
 import Link from "next/link";
 import styles from "./navBar.module.css"; // Optional CSS Module
 import { useState } from "react";
-import { logout } from "../../actions/auth-actions";
+// import { logout } from "../../actions/auth-actions";
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,9 +40,9 @@ export default function NavBar() {
           <Link href="/customExercises" onClick={() => setMenuOpen(false)}>
             Custom Workouts
           </Link>
-          <Link href={"/"} onClick={logout}>
+          {/* <Link href={"/"} onClick={logout}>
             Logout
-          </Link>
+          </Link> */}
         </nav>
       </div>
     </header>
